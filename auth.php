@@ -2,6 +2,14 @@
 session_start([
     'cookie_lifetime' => 300, //5 minutes
 ]);
+
+if (isset($_POST['username']) && $_POST['password']) {
+    if ($_POST['username'] == 'asraf35' && $_POST['password'] == 'tahmina') {
+        $_SESSION['loggedin'] = true;
+    } else {
+        $_SESSION['loggedin'] = false;
+    }
+}
 ?>
 
 <!doctype html>
@@ -26,10 +34,23 @@ session_start([
             </div>
         </div>
         <div class="col col-60 col-offset-20 mt-2">
-            <h5>Hello Stranger Login Below</h5>
+            <?php
+            if (true == $_SESSION['loggedin']) { ?>
+
+            <?php
+                echo "<h5>Hello Admin Welcome</h5>";
+            } else { ?>
+
         </div>
+        <div class="col col-60 col-offset-20 mt-2">
+        <?php
+                echo "<h5>Hello Stranger Login Below</h5>";
+            }
+        ?>
+        </div>
+
         <div class="col col-60 col-offset-20 mt-3">
-            <form>
+            <form method="POST" action="/ostad_php_project/login_session/auth.php">
                 <div class="form-group">
                     <label for="exampleInputEmail1">UserName</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" name="username">
