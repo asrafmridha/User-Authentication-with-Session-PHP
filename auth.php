@@ -10,6 +10,10 @@ if (isset($_POST['username']) && $_POST['password']) {
         $_SESSION['loggedin'] = false;
     }
 }
+if (isset($_POST['logout'])) {
+    session_destroy();
+    $_SESSION['loggedin'] = false;
+}
 ?>
 
 <!doctype html>
@@ -71,7 +75,11 @@ if (isset($_POST['username']) && $_POST['password']) {
             </div>
 
         <?php } else { ?>
-            <button type="submit" class="btn btn-danger">logout</button> <?php } ?>
+            <form action="/ostad_php_project/login_session/auth.php" method="POST">
+                <input type="hidden" name="logout" value="1">
+                <button type="submit" class="btn btn-danger">logout</button>
+            </form>
+        <?php } ?>
 
 
     </div>
