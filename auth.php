@@ -2,11 +2,13 @@
 session_start([
     'cookie_lifetime' => 300, //5 minutes
 ]);
+$error_message = false;
 
 if (isset($_POST['username']) && $_POST['password']) {
     if ($_POST['username'] == 'asraf35' && $_POST['password'] == 'tahmina') {
         $_SESSION['loggedin'] = true;
     } else {
+        $error_message = true;
         $_SESSION['loggedin'] = false;
     }
 }
@@ -52,7 +54,9 @@ if (isset($_POST['logout'])) {
             }
         ?>
         </div>
-
+        <?php if ($error_message == true) {  ?>
+            <p class="text text-danger">Username or Password doesn't Match</p>
+        <?php } ?>
         <?php if ($_SESSION['loggedin'] == false) { ?>
 
             <div class="col col-60 col-offset-20 mt-3">
